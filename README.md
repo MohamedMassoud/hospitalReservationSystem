@@ -1,6 +1,6 @@
 # Hospital Reservation System
 
-- How to run this?
+**How to run this?**
 
 1- Using Xampp.
 
@@ -11,7 +11,7 @@
 3- Go to index.php using XAMPP.
 
 
-- Updates:
+**Updates:**
 
 1- Can Sign-up/Sign-in both Patient and Nurse accounts.
 
@@ -22,7 +22,7 @@
 4- The patient chooses a doctor for appointment and the appointment is saved on the database.
 
 
-- Example accounts:
+**Example accounts:**
 
 1- Nurse account:
 
@@ -37,7 +37,7 @@
 - password: 123456
 
 
-- To be done next:
+**To be done next**
 
 1- The Nurse can explore all the reservations and confirm on them.
 
