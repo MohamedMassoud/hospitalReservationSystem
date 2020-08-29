@@ -6,6 +6,8 @@
 
 2- Put the HosRes folder in C/Xampp/htdocs.
 
+3- Import hospital.sql database snapshot using phpmyadmin.
+
 3- Go to index.php using XAMPP.
 
 
@@ -18,6 +20,21 @@
 3- The patient can explore the existing doctors on the database, can search by doctor's name, type and specialization both dynamically and interchangeably.
 
 4- The patient chooses a doctor for appointment and the appointment is saved on the database.
+
+
+- Example accounts:
+
+1- Nurse account:
+
+- username: newNurse
+
+- password: newPassword
+
+2- Patient account:
+
+- username: MohamedMassoud
+
+- password: 123456
 
 
 - To be done next:
