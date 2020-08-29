@@ -43,3 +43,4 @@
 
 2- The Nurse can query the available doctors, patients and reservations on the database both dynamically and interchangeably.
 
+3- Change the whole thing into arabic "I have already digged into how to support such encoding".
