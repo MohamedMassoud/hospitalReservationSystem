@@ -110,6 +110,7 @@
   	<div class="input-group">
   	  <button type="submit" class="btn" name="add_doctor">Add doctor</button>
   	</div>
+	<button   type="button" class="btn" name="search_doctors" onclick="location.href = 'index.php';">Home</button>
   </form>
 </body>
 </html>
