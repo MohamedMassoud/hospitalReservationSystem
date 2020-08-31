@@ -51,14 +51,17 @@
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 **Version 2**
 
 **Updates:**
+
 1- The Nurse can explore all the reservations and confirm on them.
 
 2- Many bugs fixed.
 
 3- Proper server validation for pervent duplicate queries.
+
 
 **To be done next**
 
