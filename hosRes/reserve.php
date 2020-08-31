@@ -59,7 +59,7 @@
           <?php 
 		  
           	echo $_SESSION['reserved']; 
-          	unset($_SESSION['reserved']);
+          	
           ?>
       	</h3>
       </div>
@@ -85,7 +85,7 @@
 	  <?php
 		  $array = $_SESSION['doctors'];
 		  foreach($array as $item) {
-			  echo '<tr>';
+			  echo '<tr id="',$item["DID"],'">';
 				echo  '<td>'.$item["name"].'</td>';
 				echo '<td>'.$item['docType'].'</td>';
 				echo '<td>'.$item['specialization'].'</td>';
@@ -98,6 +98,12 @@
 	  
 	  
 	</table>
+	
+	<?php if (isset($_SESSION['reserved'])){
+			echo '<script>var elem = document.getElementById(\''.$_SESSION["currentReservation"].'\');elem.parentNode.removeChild(elem);</script>';
+			unset($_SESSION['reserved']);
+		}
+		 ?>
 	<?php if(!isset($_SESSION['docsBack'])) :?>
 	<button  id="searchit" type="submit" class="btn" name="search_doctors">Search</button>
 	<?php endif; ?>

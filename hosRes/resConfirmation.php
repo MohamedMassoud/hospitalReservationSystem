@@ -52,6 +52,22 @@
 
 <form id="form" method="post" action="resConfirmation.php" >
 	<?php include('errors.php'); ?>
+	
+	<!-- notification message -->
+	<?php if (isset($_SESSION['confirmed'])) : ?>
+      <div class="error success" >
+      	<h3>
+          <?php 
+		  
+          	echo $_SESSION['confirmed']; 
+          	
+			
+		
+			
+          ?>
+      	</h3>
+      </div>
+  	<?php endif ?>
 
 		
 <?php if (isset($_SESSION['resBack'])) : ?>
@@ -86,21 +102,16 @@
 	  
 	  
 	</table>
-		<!-- notification message -->
-  	<?php if (isset($_SESSION['confirmed'])) : ?>
-      <div class="error success" >
-      	<h3>
-          <?php 
-		  
-          	echo $_SESSION['confirmed']; 
-          	unset($_SESSION['confirmed']);
-			echo '<script>var elem = document.getElementById(\''.$_SESSION["currentConfirmation"].'\');elem.parentNode.removeChild(elem);</script>';
 		
-			
-          ?>
-      	</h3>
-      </div>
-  	<?php endif ?>
+		
+		<?php if (isset($_SESSION['confirmed'])){
+			echo '<script>var elem = document.getElementById(\''.$_SESSION["currentConfirmation"].'\');elem.parentNode.removeChild(elem);</script>';
+			unset($_SESSION['confirmed']);
+		}
+		 ?>
+		
+		
+  	
 	<?php if(!isset($_SESSION['resBack'])) :?>
 	<button  id="searchit" type="submit" class="btn" name="search_reservations">Search</button>
 	<?php endif; ?>

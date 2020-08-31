@@ -107,7 +107,13 @@ if (isset($_POST['login_user'])) {
 }
 //Search doctors
 if (isset($_POST['search_doctors'])){
-	$query = "SELECT * FROM doctors";
+	$username = $_SESSION['username'];
+	echo $username;
+	$query = "SELECT doctors.name, doctors.specialization, doctors.docType, doctors.DID
+	FROM doctors
+	LEFT JOIN reservations
+	ON doctors.DID = reservations.doctorDID
+	WHERE NOT reservations.patientUsername='MohamedMassoud' OR reservations.patientUsername IS NULL;";	
 	$result = mysqli_query($db, $query);
 
 	$rows = [];
@@ -115,8 +121,12 @@ if (isset($_POST['search_doctors'])){
 	{
 		$rows[] = $row;
 	}
+	
+	
+	
 	$_SESSION['doctors'] = $rows;
 	$_SESSION['docsBack'] = true;
+	
 	//header('location: reserve.php');
 }
 
@@ -136,7 +146,7 @@ if (isset($_POST['add_doctor'])){
   	//$_SESSION['username'] = $username;
   	$_SESSION['success'] = "Doctor added successfully!";
   	//header('location: addDoctor.php');
-		}
+	}
 		
 //Reserve
 	if (isset($_POST['reserve'])){
@@ -156,7 +166,7 @@ if (isset($_POST['add_doctor'])){
 			$query = "INSERT INTO reservations (patientUsername, doctorDID) VALUES ('$patientUsername', '$DID')";
 			mysqli_query($db, $query);
 			$_SESSION['reserved'] = "Successfully reserved!";
-			
+			$_SESSION['currentReservation'] = $DID;			
 		}
 		
 		//header('location: reserve.php');
@@ -198,7 +208,6 @@ if (isset($_POST['add_doctor'])){
 		if($confirmationRes){
 			array_push($errors, "This appointment is already confirmed!");
 		}else{
-			echo "$patientUsername" . ":" . "$DID";
 			$query = "UPDATE reservations SET confirmed = 1 WHERE  patientUsername='$patientUsername' AND doctorDID = '$DID'";
 			mysqli_query($db, $query);
 			$_SESSION['confirmed'] = "Successfully Confirmed!";
