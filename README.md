@@ -60,7 +60,7 @@
 
 2- Many bugs fixed.
 
-3- Proper server validation for pervent duplicate queries.
+3- Proper server validation to pervent duplicate queries.
 
 
 **To be done next**
