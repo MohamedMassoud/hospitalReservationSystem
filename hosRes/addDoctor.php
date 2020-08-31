@@ -62,7 +62,7 @@
 </head>
 <body>
   <div class="header">
-  	<h2>Sign up</h2>
+  	<h2>Add doctor</h2>
   </div>
   
 	

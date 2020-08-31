@@ -47,10 +47,13 @@
 		<input class="btn" type="button" value="حجز" name="reserve" onClick="document.location.href='reserve.php'" />
 	<?php endif ?>
 	<?php  if ($_SESSION['accType'] == 'Nurse') : ?>
-    	<input class="btn" type="button" value="تأكيد الحجوزات"  onClick="document.location.href='queryPatient.php'" />
+    	<input class="btn" type="button" value="تأكيد الحجوزات"  onClick="document.location.href='resConfirmation.php'" />
 		<input class="btn" type="button" value="إضافة دكتور" onClick="document.location.href='addDoctor.php'" />
 		<input class="btn" type="button" value="إستعلام" onClick="document.location.href='resConfirmation.php'" />
     <?php endif ?>
+	
+	
+	
 </div>
 		
 </body>

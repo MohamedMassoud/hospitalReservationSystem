@@ -3,5 +3,7 @@
   	<?php foreach ($errors as $error) : ?>
   	  <p><?php echo $error ?></p>
   	<?php endforeach ?>
+	
   </div>
+  <?php echo '<br>';?>
 <?php  endif ?>

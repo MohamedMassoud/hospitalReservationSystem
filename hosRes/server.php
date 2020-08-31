@@ -105,7 +105,7 @@ if (isset($_POST['login_user'])) {
   	}
   }
 }
-//Seach doctors
+//Search doctors
 if (isset($_POST['search_doctors'])){
 	$query = "SELECT * FROM doctors";
 	$result = mysqli_query($db, $query);
@@ -117,7 +117,7 @@ if (isset($_POST['search_doctors'])){
 	}
 	$_SESSION['doctors'] = $rows;
 	$_SESSION['docsBack'] = true;
-	header('location: reserve.php');
+	//header('location: reserve.php');
 }
 
 //Add doctor
@@ -133,22 +133,97 @@ if (isset($_POST['add_doctor'])){
 	$query = "INSERT INTO doctors ( regDate, name, address, phoneNumber, gender, docType, specialization) 
   			  VALUES('$date', '$name', '$address', '$phoneNumber', '$gender', '$docType', '$specialization')";
   	mysqli_query($db, $query);
-  	$_SESSION['username'] = $username;
+  	//$_SESSION['username'] = $username;
   	$_SESSION['success'] = "Doctor added successfully!";
-  	header('location: addDoctor.php');
+  	//header('location: addDoctor.php');
 		}
 		
-//Reserver
+//Reserve
 	if (isset($_POST['reserve'])){
+		
 		$patientUsername = $_SESSION['username'];
 		$DID = $_POST['reserve'];
-		$query = "INSERT INTO reservations (patientUsername, doctorDID) VALUES ('$patientUsername', '$DID')";
-		mysqli_query($db, $query);
-		$_SESSION['reserved'] = "Successfully reserved!";
-		header('location: reserve.php');
+		
+		$reservationQuery = "SELECT * FROM reservations WHERE patientUsername='$patientUsername' AND doctorDID='$DID' LIMIT 1";
+		$result = mysqli_query($db, $reservationQuery);
+		$reservationRes = mysqli_fetch_assoc($result);
+		
+		if($reservationRes){
+			
+			array_push($errors, "This appointment is already reserved!");
+			
+		}else{
+			$query = "INSERT INTO reservations (patientUsername, doctorDID) VALUES ('$patientUsername', '$DID')";
+			mysqli_query($db, $query);
+			$_SESSION['reserved'] = "Successfully reserved!";
+			
+		}
+		
+		//header('location: reserve.php');
 	}
 	
-
+	// Search reservations
+	if(isset($_POST['search_reservations'])){
+		$query = "SELECT patients.name AS 'patientName', doctors.name AS 'doctorName',
+		doctors.specialization AS 'specialization', doctors.docType AS 'docType',
+		doctors.DID AS 'DID', patients.username AS 'patientUsername'
+		FROM ((reservations 
+		INNER JOIN patients ON reservations.patientUsername = patients.username)
+		INNER JOIN doctors ON reservations.doctorDID = doctors.DID)
+		WHERE reservations.confirmed = '0';";
+		
+		$result = mysqli_query($db, $query);
+		$rows = [];
+		while($row = mysqli_fetch_array($result))
+		{
+			$rows[] = $row;
+		}
+		$_SESSION['reservations'] = $rows;
+		$_SESSION['resBack'] = true;
+		
+	}
+	
+	// Confirm reservations
+	
+	if(isset($_POST['confirmReservation'])){
+		$value = $_POST['confirmReservation'];
+		$pieces = explode(" ", $value);
+		$patientUsername = $pieces[0];
+		$DID = $pieces[1];
+		
+		$checkQuery = "SELECT * FROM reservations WHERE patientUsername = '$patientUsername' AND doctorDID = '$DID' AND confirmed = 1 LIMIT 1 ";
+		$result = mysqli_query($db, $checkQuery);
+		$confirmationRes = mysqli_fetch_assoc($result);
+		
+		if($confirmationRes){
+			array_push($errors, "This appointment is already confirmed!");
+		}else{
+			echo "$patientUsername" . ":" . "$DID";
+			$query = "UPDATE reservations SET confirmed = 1 WHERE  patientUsername='$patientUsername' AND doctorDID = '$DID'";
+			mysqli_query($db, $query);
+			$_SESSION['confirmed'] = "Successfully Confirmed!";
+			$_SESSION['currentConfirmation'] = $value;
+			
+			
+			
+			$query = "SELECT patients.name AS 'patientName', doctors.name AS 'doctorName',
+			doctors.specialization AS 'specialization', doctors.docType AS 'docType',
+			doctors.DID AS 'DID', patients.username AS 'patientUsername'
+			FROM ((reservations 
+			INNER JOIN patients ON reservations.patientUsername = patients.username)
+			INNER JOIN doctors ON reservations.doctorDID = doctors.DID)
+			WHERE reservations.confirmed = '0';";
+			
+			$result = mysqli_query($db, $query);
+			$rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+				$rows[] = $row;
+			}
+			$_SESSION['reservations'] = $rows;
+		}
+		
+	}
 
 ?>
 

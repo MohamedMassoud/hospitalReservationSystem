@@ -46,7 +46,9 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 
 
-<h2> Doctor reservation</h2>
+<div class="header">
+  	<h2>Doctor reservation</h2>
+  </div>
 
 <form id="form" method="post" action="reserve.php" >
 	<?php include('errors.php'); ?>
@@ -57,7 +59,7 @@
           <?php 
 		  
           	echo $_SESSION['reserved']; 
-          	//unset($_SESSION['reserved']);
+          	unset($_SESSION['reserved']);
           ?>
       	</h3>
       </div>
@@ -99,7 +101,7 @@
 	<?php if(!isset($_SESSION['docsBack'])) :?>
 	<button  id="searchit" type="submit" class="btn" name="search_doctors">Search</button>
 	<?php endif; ?>
-	<button   type="button" class="btn" name="search_doctors" onclick="location.href = 'index.php';">Home</button>
+	<button   type="button" class="btn" name="home" onclick="location.href = 'index.php';">Home</button>
 </form>
 <script>
 
