@@ -70,3 +70,23 @@
 2- Change the whole thing into arabic "I have already digged into how to support such encoding".
 
 3- Very detailed ER diagram to recheck the database design.
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Version 3**
+
+**Updates:**
+
+1- Fixed dynamic loading of rows for reservation.
+
+
+**To be done next**
+
+1- The Nurse can query the available doctors, patients and reservations on the database both dynamically and interchangeably.
+
+2- Change the whole thing into arabic "I have already digged into how to support such encoding".
+
+3- Very detailed ER diagram to recheck the database design.
