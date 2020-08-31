@@ -44,3 +44,26 @@
 2- The Nurse can query the available doctors, patients and reservations on the database both dynamically and interchangeably.
 
 3- Change the whole thing into arabic "I have already digged into how to support such encoding".
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Version 2**
+
+**Updates:**
+1- The Nurse can explore all the reservations and confirm on them.
+
+2- Many bugs fixed.
+
+3- Proper server validation for pervent duplicate queries.
+
+**To be done next**
+
+1- The Nurse can query the available doctors, patients and reservations on the database both dynamically and interchangeably.
+
+2- Change the whole thing into arabic "I have already digged into how to support such encoding".
+
+3- Very detailed ER diagram to recheck the database design.
