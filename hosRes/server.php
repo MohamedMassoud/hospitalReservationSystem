@@ -108,12 +108,17 @@ if (isset($_POST['login_user'])) {
 //Search doctors
 if (isset($_POST['search_doctors'])){
 	$username = $_SESSION['username'];
-	echo $username;
-	$query = "SELECT doctors.name, doctors.specialization, doctors.docType, doctors.DID
-	FROM doctors
-	LEFT JOIN reservations
-	ON doctors.DID = reservations.doctorDID
-	WHERE NOT reservations.patientUsername='MohamedMassoud' OR reservations.patientUsername IS NULL;";	
+	$query = "SELECT name, specialization, docType, DID FROM doctors
+	WHERE DID NOT IN (SELECT doctorDID FROM reservations WHERE patientUsername = '$username')";	
+	
+	/*$query = "SELECT doctors.name, doctors.specialization, doctors.docType, doctors.DID
+			FROM ((reservations 
+			INNER JOIN patients ON reservations.patientUsername = patients.username)
+			INNER JOIN doctors ON reservations.doctorDID = doctors.DID)
+			WHERE patients.Username=reservations.patientUsername";*/
+	
+	
+	
 	$result = mysqli_query($db, $query);
 
 	$rows = [];
@@ -166,7 +171,23 @@ if (isset($_POST['add_doctor'])){
 			$query = "INSERT INTO reservations (patientUsername, doctorDID) VALUES ('$patientUsername', '$DID')";
 			mysqli_query($db, $query);
 			$_SESSION['reserved'] = "Successfully reserved!";
-			$_SESSION['currentReservation'] = $DID;			
+			$_SESSION['currentReservation'] = $DID;
+
+
+			$username = $_SESSION['username'];
+			$query = "SELECT name, specialization, docType, DID FROM doctors
+			WHERE DID NOT IN (SELECT doctorDID FROM reservations WHERE patientUsername = '$username')";	
+			$result = mysqli_query($db, $query);
+
+			$rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+				$rows[] = $row;
+			}
+			
+			
+			
+			$_SESSION['doctors'] = $rows;
 		}
 		
 		//header('location: reserve.php');
