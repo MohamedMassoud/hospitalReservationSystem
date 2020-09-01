@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sign up</title>
+  <title>إضافة طبيب</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   
   <script>
@@ -20,30 +20,30 @@
 		
 		
 		if(name==""){
-			errors.push("Name can't be empty.");
+			errors.push(".يجب ملء خانة الأسم");
 			numerrors++;
 		}
 		if(address ==""){
-			errors.push("Address can't be empty.");
+			errors.push(".يجب ملء خانة العنوان");
 			numerrors++;
 		}
 		var phoneno = /^\d{11}$/;
 		if(phoneNumber == ""){
-			errors.push("Phone number can't be empty.");
+			errors.push(".يجب ملء خانة رقم الهاتف");
 		}else if(!phoneNumber.match(phoneno)){
-			errors.push("Phone number is not valid.");
+			errors.push(".رقم الهاتف غير صحيح");
 			numerrors++;
 		}
 		if (gender == ""){
-			errors.push("Gender can't be empty.");
+			errors.push(".يجب ملء خانة نوع الجنس");
 			numerrors++;
 		}
 		if (specialization == ""){
-			errors.push("Specialization can't be empty.");
+			errors.push(".يجب ملء خانة التخصص");
 			numerrors++;
 		}
 		if(docType == ""){
-			errors.push("Doctor type can't be empty.");
+			errors.push(".يجب ملء خانة درجة الطبيب");
 			numerrors++;
 		}
 		
@@ -62,11 +62,11 @@
 </head>
 <body>
   <div class="header">
-  	<h2>Add doctor</h2>
+  	<h2>إضافة طبيب</h2>
   </div>
   
 	
-  <form name= "reg" method="post" action="register.php" onsubmit="return validate();">
+  <form name= "reg" method="post" action="addDoctor.php" onsubmit="return validate();">
   	<?php include('errors.php'); ?>
 	<?php if (isset($_SESSION['success'])) : ?>
       <div class="error success" >
@@ -83,34 +83,35 @@
 	</div>
 
 	<div class="input-group">
-  	  <label>Full name</label>
+  	  <label>أسم الطبيب كامل</label>
   	  <input id="name" type="text" name="name">
   	</div>
 	<div class="input-group">
-  	  <label>Address</label>
+  	  <label>عنوان الطبيب</label>
   	  <input id="address" type="text" name="address">
   	</div>
 	<div class="input-group">
-  	  <label>Phone number</label>
+  	  <label>رقم هاتف الطبيب</label>
   	  <input id="phoneNumber" type="text" name="phoneNumber">
   	</div>
 	<div >
-  	  <label>Gender: </label>
-  	   <label  class="radio-inline"><input  type="radio" value="male" name="gender">Male</label>
-		<label  class="radio-inline"><input type="radio" value="female" name="gender">Female</label>
+	
+  	  <label>نوع جنس الطبيب </label>
+  	   <label  class="radio-inline"><input  type="radio" value="ذكر" name="gender">ذكر</label>
+		<label  class="radio-inline"><input type="radio" value="أنثى" name="gender">أنثى</label>
   	</div>
 	<div class="input-group">
-  	  <label>Doctor type</label>
+  	  <label>درجة الطبيب</label>
   	  <input id="docType" type="text" name="docType">
   	</div>
 	<div class="input-group">
-  	  <label>Specialization</label>
+  	  <label>تخصص الطبيب</label>
   	  <input id="specialization" type="text" name="specialization">
   	</div>
   	<div class="input-group">
-  	  <button type="submit" class="btn" name="add_doctor">Add doctor</button>
+  	  <button type="submit" class="btn" name="add_doctor">إضافة الطبيب</button>
   	</div>
-	<button   type="button" class="btn" name="search_doctors" onclick="location.href = 'index.php';">Home</button>
+	<button   type="button" class="btn" name="search_doctors" onclick="location.href = 'index.php';">الصفحة الرئيسية</button>
   </form>
 </body>
 </html>

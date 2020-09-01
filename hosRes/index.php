@@ -14,18 +14,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>الصفحة الرئيسية</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
 <div class="header">
-	<h2>Home Page</h2>
+	<h2>الصفحة الرئيسية</h2>
 </div>
-<div class="content">
+<div class="content" ">
   	<!-- notification message -->
   	<?php if (isset($_SESSION['success'])) : ?>
-      <div class="error success" >
+      <div class="error success" ">
       	<h3>
           <?php 
 		  
@@ -38,18 +38,20 @@
 
     <!-- logged in user information -->
     <?php  if (isset($_SESSION['username'])) : ?>
-    	<p> Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-		<p> You are logged in as <strong> <?php echo $_SESSION['accType']; ?> </strong></p>
-    	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
+    	<p><strong><?php echo $_SESSION['username']; ?></strong>  مرحباً </p>
+		<p> تم تسجيل الدخول ك <strong> <?php echo $_SESSION['accType']; ?> </strong></p>
+    	<p> <a href="index.php?logout='1'" style="color: red;">تسجيل الخروج</a> </p>
     <?php endif ?>
 	
-	<?php if($_SESSION['accType'] == "Patient") : ?>
+	<?php if($_SESSION['accType'] == 'مريض') : ?>
+		<br>
 		<input class="btn" type="button" value="حجز" name="reserve" onClick="document.location.href='reserve.php'" />
 	<?php endif ?>
-	<?php  if ($_SESSION['accType'] == 'Nurse') : ?>
+	<?php  if ($_SESSION['accType'] == 'ممرضة') : ?>
+	<br>
     	<input class="btn" type="button" value="تأكيد الحجوزات"  onClick="document.location.href='resConfirmation.php'" />
-		<input class="btn" type="button" value="إضافة دكتور" onClick="document.location.href='addDoctor.php'" />
-		<input class="btn" type="button" value="إستعلام" onClick="document.location.href='resConfirmation.php'" />
+		<input class="btn" type="button" value="إضافة طبيب" onClick="document.location.href='addDoctor.php'" />
+		<input class="btn" type="button" value="إستعلام" onClick="document.location.href='queryHospital.php'" />
     <?php endif ?>
 	
 	

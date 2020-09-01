@@ -21,14 +21,16 @@
 
 
 #myTable {
+  width: 100%	;
+  margin-right: 0px;
+  margin-left: auto;
   border-collapse: collapse;
-  width: 100%;
   border: 1px solid #ddd;
   font-size: 18px;
 }
 
 #myTable th, #myTable td {
-  text-align: left;
+  text-align: right;
   padding: 12px;
 }
 
@@ -42,12 +44,12 @@
 </style>
 </head>
 <body>
-<title>Reservation</title>
+<title>حجز طبيب</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 
 
 <div class="header">
-  	<h2>Doctor reservation</h2>
+  	<h2>حجز طبيب</h2>
   </div>
 
 <form id="form" method="post" action="reserve.php" >
@@ -66,19 +68,19 @@
   	<?php endif ?>
 	
 <?php if (isset($_SESSION['docsBack'])) : ?>
-	<input type="text" class="myInput" id="myInput" onkeyup="myFunction()" placeholder="Search by name..." title="Type in a name">
+	<input type="text" class="myInput" id="myInput" onkeyup="updateDoctors()" placeholder="... البحث بأسم الطبيب" title="Type in a name">
 
-	<input type="text" class="myInput" id="myInput2" onkeyup="myFunction()" placeholder="Search by doctor type..." title="Type in a name">
+	<input type="text" class="myInput" id="myInput2" onkeyup="updateDoctors()" placeholder="... البحث بدرجة الطبيب" title="Type in a docType">
 
-	<input type="text" class="myInput" id="myInput3" onkeyup="myFunction()" placeholder="Search by doctor specialization..." title="Type in a name">
+	<input type="text" class="myInput" id="myInput3" onkeyup="updateDoctors()" placeholder="... البحث بتخصص الطبيب" title="Type in a specialization">
 
-	<table id="myTable">
+	<table id="myTable"  DIR="RTL">
 	
 	  <tr >
-		<th style="width:40%;">Name</th>
-		<th style="width:25%;">Doctor type</th>
-		<th style="width:25%;">Specialization</th>
-		<th style="width:10%;">Reservation</th>
+		<th style="width:40%;">الأسم</th>
+		<th style="width:25%;">درجة الطبيب</th>
+		<th style="width:25%;">التخصص</th>
+		<th style="width:10%;">حجز</th>
 	  </tr>
 	  
 	  
@@ -89,7 +91,7 @@
 				echo  '<td>'.$item["name"].'</td>';
 				echo '<td>'.$item['docType'].'</td>';
 				echo '<td>'.$item['specialization'].'</td>';
-				echo '<td><button type="submit" class="btn"  name="reserve" value="',$item["DID"],'">Reserve</button> </td>';
+				echo '<td><button type="submit" class="btn"  name="reserve" value="',$item["DID"],'">حجز</button> </td>';
 				echo '</tr>';
 		
 			}
@@ -105,14 +107,16 @@
 		}
 		 ?>
 	<?php if(!isset($_SESSION['docsBack'])) :?>
-	<button  id="searchit" type="submit" class="btn" name="search_doctors">Search</button>
+	<button  id="searchit" type="submit" class="btn" name="search_doctors">بحث</button>
+	<br>
 	<?php endif; ?>
-	<button   type="button" class="btn" name="home" onclick="location.href = 'index.php';">Home</button>
+	<br>
+	<button   type="button" class="btn" name="home" onclick="location.href = 'index.php';">الصفحة الرئيسية</button>
 </form>
 <script>
 
 
-function myFunction() {
+function updateDoctors() {
   var input, input2, input3, filter, filter2, filter3, table, tr, td, td2, td3, i, txtValue, txtValue2, txtValue3;
   input = document.getElementById("myInput");
   input2 = document.getElementById("myInput2");

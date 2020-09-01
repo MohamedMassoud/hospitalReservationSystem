@@ -20,39 +20,39 @@
 		
 		if(usr==""){
 			
-			errors.push("Username can't be empty.");
+			errors.push(".يجب ملء خامة أسم المستخدم");
 			numerrors++;
 			
 		}
 		if(pw1==""){
-			errors.push("Password can't be empty.");
+			errors.push(".يجب ملء خانة كلمة السر");
 			numerrors++;
 		}else if(pw1!=pw2){
-			errors.push("Passwords don't match.");
+			errors.push(".كلمتا السر غير متطابقتان");
 			numerrors++;
 		}
 		
 		if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(em))){
-			errors.push("Invalid Email address.");
+			errors.push(".البريد الالكتروني غير صحيح");
 			numerrors++;
 		}
 		if(name==""){
-			errors.push("Name can't be empty.");
+			errors.push(".يجب ملء خانة الأسم");
 			numerrors++;
 		}
 		if(address ==""){
-			errors.push("Address can't be empty.");
+			errors.push(".يجب ملء خانة العنوان");
 			numerrors++;
 		}
 		var phoneno = /^\d{11}$/;
 		if(phoneNumber == ""){
-			errors.push("Phone number can't be empty.");
+			errors.push(".يجب ملء خانة رقم الهاتف");
 		}else if(!phoneNumber.match(phoneno)){
-			errors.push("Phone number is not valid.");
+			errors.push(".رقم الهاتف غير صحيح");
 			numerrors++;
 		}
 		if (gender == ""){
-			errors.push("Gender can't be empty.");
+			errors.push(".يجب ملء خانة نوع الجنس");
 			numerrors++;
 		}
 		
@@ -71,7 +71,7 @@
 </head>
 <body>
   <div class="header">
-  	<h2>Sign up</h2>
+  	<h2>إنشاء حساب جديد</h2>
   </div>
 	
   <form name= "reg" method="post" action="register.php" onsubmit="return validate();">
@@ -81,43 +81,43 @@
 	<p id="hint"></p>
 	</div>
   	<div class="input-group">
-  	  <label>Username</label>
+  	  <label>أسم المستخدم</label>
   	  <input id="usr" type="text" name="username">
   	</div>
   	<div class="input-group">
-  	  <label>Email</label>
+  	  <label>البريد الالكتروني</label>
   	  <input id="em" type="text" name="email">
   	</div>
   	<div class="input-group">
-  	  <label>Password</label>
+  	  <label>كلمة السر</label>
   	  <input id="pw1" type="password" name="password_1">
   	</div>
   	<div class="input-group">
-  	  <label>Confirm password</label>
+  	  <label>إعادة كتابة كلمة السر</label>
   	  <input id="pw2" type="password" name="password_2">
   	</div>
 	<div class="input-group">
-  	  <label>Full name</label>
+  	  <label>الأسم الكامل</label>
   	  <input id="name" type="text" name="name">
   	</div>
 	<div class="input-group">
-  	  <label>Address</label>
+  	  <label>العنوان</label>
   	  <input id="address" type="text" name="address">
   	</div>
 	<div class="input-group">
-  	  <label>Phone number</label>
+  	  <label>رقم الهاتف</label>
   	  <input id="phoneNumber" type="text" name="phoneNumber">
   	</div>
 	<div >
-  	  <label>Gender: </label>
-  	   <label  class="radio-inline"><input  type="radio" value="male" name="gender">Male</label>
-		<label  class="radio-inline"><input type="radio" value="female" name="gender">Female</label>
+  	  <label>نوع الجنس </label>
+  	   <label  class="radio-inline"><input  type="radio" value="male" name="gender">ذكر</label>
+		<label  class="radio-inline"><input type="radio" value="female" name="gender">أنثى</label>
   	</div>
   	<div class="input-group">
-  	  <button type="submit" class="btn" name="reg_user">Sign up</button>
+  	  <button type="submit" class="btn" name="reg_user">أنشأ حساب جديد</button>
   	</div>
   	<p>
-  		Already a member? <a href="login.php">Sign in</a>
+  		تمتلك حساب؟ <a href="login.php">تسجيل الدخول</a>
   	</p>
   </form>
 </body>

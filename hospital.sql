@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2020 at 06:38 PM
+-- Generation Time: Sep 01, 2020 at 10:00 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -44,11 +44,10 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`name`, `address`, `gender`, `phoneNumber`, `specialization`, `docType`, `regDate`, `DID`) VALUES
-('Mohamed Massoud', 'Ebrahimia', 'male', '01113758156', 'Bone', 'Consultant', '2020-08-29 11:36:30', 1),
-('Amr Agamy', 'Loran', 'male', '01005006987', 'Neurons', 'Specialized', '2020-08-29 11:40:22', 3),
-('Doaa Khaled', 'Smouha', 'female', '01113758156', 'Immunology', 'Specialized', '2020-08-29 11:41:34', 4),
-('Dina Hadad', '143, Al Ebrahimia, Portsaid st., Alexandria, Egypt', 'female', '01113758156', 'Stroke medicine', 'Consultant', '2020-08-29 11:41:57', 5),
-('Basel Mehana', '143, Al Ebrahimia, Portsaid st., Alexandria, Egypt', 'male', '01113758156', 'Immunology', 'Specialized', '2020-08-29 19:05:05', 6);
+('Ø¹Ù…Ø±Ùˆ Ø¹Ø¬Ù…ÙŠ', 'Ù„ÙˆØ±Ø§Ù†', 'Ø°ÙƒØ±', '01112223456', 'Ø§Ø¹ØµØ§Ø¨', 'Ø§Ø³ØªØ´Ø§Ø±ÙŠ', '2020-09-01 19:59:46', 18),
+('Ù…ØµØ·ÙÙ‰ Ù‚Ø¨Ø§Ø±ÙŠ', 'Ø¬Ù„ÙŠÙ…', 'Ø°ÙƒØ±', '01272587946', 'Ø¹Ø¸Ø§Ù…', 'Ø£Ø®ØµØ§Ø¦ÙŠ', '2020-09-01 20:00:27', 19),
+('Ø£Ù…ÙŠÙ…Ø© Ø³Ø§Ù„Ù…', 'Ø§Ù„Ù…Ø¹Ø§Ø¯ÙŠ', 'Ø£Ù†Ø«Ù‰', '01178432131', 'ØªØºØ°ÙŠØ©', 'Ø§Ø³ØªØ´Ø§Ø±ÙŠ', '2020-09-01 20:01:11', 20),
+('Ù…ØµØ·ÙÙ‰ Ø§Ø­Ù…Ø¯', '143, Al Ebrahimia, Portsaid st., Alexandria, Egypt', 'Ø°ÙƒØ±', '01113233156', 'Ø¬Ø±Ø§Ø­Ø©', 'Ø§Ø³ØªØ´Ø§Ø±ÙŠ', '2020-09-01 20:01:44', 21);
 
 -- --------------------------------------------------------
 
@@ -73,7 +72,7 @@ CREATE TABLE `nurses` (
 --
 
 INSERT INTO `nurses` (`username`, `email`, `password`, `regDate`, `lastLoginDate`, `name`, `address`, `phoneNumber`, `gender`) VALUES
-('newNurse', 'newEmail@gmail.com', '14a88b9d2f52c55b5fbcf9c5d9c11875', '2020-08-28 00:00:00', '2020-08-31 18:34:37', 'Safaa', 'Smouha', '01223548915', 'Female');
+('newNurse', 'safaa@gmail.com', '14a88b9d2f52c55b5fbcf9c5d9c11875', NULL, '2020-09-01 21:37:57', 'Safaa', 'Smouha', '0124569874', 'female');
 
 -- --------------------------------------------------------
 
@@ -98,9 +97,7 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`username`, `email`, `password`, `regDate`, `lastLoginDate`, `name`, `address`, `phoneNumber`, `gender`) VALUES
-('amragamy', 'amragamy@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2020-08-29 18:54:04', '2020-08-31 18:34:20', 'Amr Agamy', 'Gleem', '01113758156', 'male'),
-('iamlinkman', 'lin22kman44@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2020-08-30 10:58:32', '2020-08-30 10:58:32', 'Ahmed Morsy', '143, Al Ebrahimia, Portsaid st., Alexandria, Egypt', '01113758156', 'male'),
-('MohamedMassoud', 'linkman44@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2020-08-27 00:00:00', '2020-08-31 18:34:01', 'Mohamed Massoud', '143, Al Ebrahimia, Portsaid st., Alexandria, Egypt', '01113758156', 'Male');
+('MohamedMassoud', 'linkman44@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2020-09-01 19:58:40', '2020-09-01 21:42:05', 'Ù…Ø­Ù…Ø¯ Ù…Ø³Ø¹ÙˆØ¯ Ù…Ø­Ù…Ø¯ Ø´Ù„Ø¨ÙŠ', 'Ø§Ù„Ø§Ø¨Ø±Ø§Ù‡ÙŠÙ…ÙŠØ© Ø´Ø§Ø±Ø¹ Ø¨ÙˆØ±Ø³Ø¹ÙŠØ¯ ', '01113758156', 'male');
 
 -- --------------------------------------------------------
 
@@ -119,8 +116,8 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`patientUsername`, `doctorDID`, `confirmed`) VALUES
-('amragamy', 1, 0),
-('MohamedMassoud', 5, 1);
+('MohamedMassoud', 18, 0),
+('MohamedMassoud', 19, 1);
 
 --
 -- Indexes for dumped tables
@@ -159,7 +156,7 @@ ALTER TABLE `reservations`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `DID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `DID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

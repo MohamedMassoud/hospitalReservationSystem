@@ -2,7 +2,7 @@
 <html>
 <head>
 
-  <title>Sign in</title>
+  <title>تسجيل الدخول</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   
   <script>
@@ -14,18 +14,18 @@
 		
 		if(usr==""){
 			
-			errors.push("Username can't be empty");
+			errors.push(".يجب ملء خانة أسم المستخدم");
 			numerrors++;
 			
 		}
 		if(pw==""){
-			errors.push("Password can't be empty");
+			errors.push(".يجب ملء خانة كلمة السر");
 			numerrors++;
 		}
 		
 		
 		if(numerrors!=0){
-			document.getElementById("hint").innerHTML = errors.toString().replace(",", " ").fontcolor("red");
+			document.getElementById("hint").innerHTML = errors.toString().replace(/,/g, "<br>").fontcolor("red");
 			return false;
 		}else{
 			<?php include('server.php') ?>
@@ -39,7 +39,7 @@
 
 <body>
   <div class="header">
-  	<h2>Sign in</h2>
+  	<h2>تسجيل الدخول</h2>
   </div>
 	 
   <form id="form" method="post" action="login.php" onsubmit="return validate();">
@@ -51,22 +51,22 @@
 
   	<div class="input-group">
 	
-  		<label>Username</label>
+  		<label>أسم المستخدم</label>
   		<input id="usr" type="text" name="username" >
   	</div>
 	
 	
   	<div class="input-group">
-  		<label>Password</label>
+  		<label>كلمة السر</label>
   		<input id="pw" type="password" name="password">
   	</div>
   	<div class="input-group">
-  		<button type="submit" class="btn" name="login_user">Sign in</button>
+  		<button type="submit" class="btn" name="login_user">تسجيل الدخول</button>
   	</div>
 	<p>
-  		Not yet a member?
+  		لا تمتلك حساب؟
 
-		<a href="register.php"> Signup <a/>
+		<a href="register.php"> إنشاء حساب جديد <a/>
   </p>
   
   	

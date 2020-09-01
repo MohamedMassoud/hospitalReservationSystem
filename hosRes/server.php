@@ -40,17 +40,17 @@ if (isset($_POST['reg_user'])) {
   
   if ($user) { // if user exists
     if ($user['username'] === $username) {
-      array_push($errors, "Username already exists");
+      array_push($errors, "أسم المستخدم مستخدم بالعفل");
     }
 
     if ($user['email'] === $email) {
-      array_push($errors, "Email already exists");
+      array_push($errors, "البريد الألكتروني مستخدم بالفعل");
     }
   }
 
   // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
-	  $_SESSION['accType'] = "Patient";
+	  $_SESSION['accType'] = "مريض";
   	$password = md5($password_1);//encrypt the password before saving in the database
 	$date = date('y-m-d H:i:s');
 
@@ -58,7 +58,7 @@ if (isset($_POST['reg_user'])) {
   			  VALUES('$username', '$email', '$password', '$date', '$date', '$name', '$address', '$phoneNumber', '$gender')";
   	mysqli_query($db, $query);
   	$_SESSION['username'] = $username;
-  	$_SESSION['success'] = "You are now logged in";
+  	$_SESSION['success'] = "تم تسجيل الدخول بنجاح";
   	header('location: index.php');
 		}
 	
@@ -76,11 +76,11 @@ if (isset($_POST['login_user'])) {
   	$query = "SELECT * FROM patients WHERE username='$username' AND password='$password'";
   	$results = mysqli_query($db, $query);
   	if (mysqli_num_rows($results) == 1) {
-	  $_SESSION['accType'] = "Patient";
+	  $_SESSION['accType'] = "مريض";
 	  $date = date('y-m-d H:i:s');
 	  $query = "UPDATE patients SET lastLoginDate = '$date' WHERE username='$username' AND password='$password'";
 	  $_SESSION['username'] = $username;
-  	  $_SESSION['success'] = "You are now logged in";
+  	  $_SESSION['success'] = "تم تسجيل الدخول بنجاح";
 	  mysqli_query($db, $query);
   	  header('location: index.php');
   	}else{
@@ -89,15 +89,15 @@ if (isset($_POST['login_user'])) {
 		$query = "SELECT * FROM nurses WHERE username='$username' AND password='$password'";
 		$results = mysqli_query($db, $query);
 		if (mysqli_num_rows($results) == 1) {
-		$_SESSION['accType'] = "Nurse";
+		$_SESSION['accType'] = "ممرضة";
 		$date = date('y-m-d H:i:s');
 		$query = "UPDATE nurses SET lastLoginDate = '$date' WHERE username='$username' AND password='$password'";
 		$_SESSION['username'] = $username;
-		$_SESSION['success'] = "You are now logged in";
+		$_SESSION['success'] = "تم تسجيل الدخول بنجاح";
 		mysqli_query($db, $query);
 		header('location: index.php');
 		}else{
-			array_push($errors, "Wrong username/password combination");
+			array_push($errors, "بيانات تسجيل الدخول خاطئة");
 		}
 		
 		
@@ -149,7 +149,7 @@ if (isset($_POST['add_doctor'])){
   			  VALUES('$date', '$name', '$address', '$phoneNumber', '$gender', '$docType', '$specialization')";
   	mysqli_query($db, $query);
   	//$_SESSION['username'] = $username;
-  	$_SESSION['success'] = "Doctor added successfully!";
+  	$_SESSION['success'] = "تمت إضافة الطبيب بنجاح";
   	//header('location: addDoctor.php');
 	}
 		
@@ -165,12 +165,12 @@ if (isset($_POST['add_doctor'])){
 		
 		if($reservationRes){
 			
-			array_push($errors, "This appointment is already reserved!");
+			array_push($errors, "تم الحجز بالفعل مع هذا الطبيب");
 			
 		}else{
 			$query = "INSERT INTO reservations (patientUsername, doctorDID) VALUES ('$patientUsername', '$DID')";
 			mysqli_query($db, $query);
-			$_SESSION['reserved'] = "Successfully reserved!";
+			$_SESSION['reserved'] = "تم الحجز بنجاح";
 			$_SESSION['currentReservation'] = $DID;
 
 
@@ -227,11 +227,11 @@ if (isset($_POST['add_doctor'])){
 		$confirmationRes = mysqli_fetch_assoc($result);
 		
 		if($confirmationRes){
-			array_push($errors, "This appointment is already confirmed!");
+			array_push($errors, "تم تأكيد هذا الحجز بالفعل");
 		}else{
 			$query = "UPDATE reservations SET confirmed = 1 WHERE  patientUsername='$patientUsername' AND doctorDID = '$DID'";
 			mysqli_query($db, $query);
-			$_SESSION['confirmed'] = "Successfully Confirmed!";
+			$_SESSION['confirmed'] = "تم التأكيد بنجاح";
 			$_SESSION['currentConfirmation'] = $value;
 			
 			
@@ -254,7 +254,61 @@ if (isset($_POST['add_doctor'])){
 		}
 		
 	}
-
+	
+	//Query patients
+	if(isset($_POST['queryPatients'])){
+		$query = "SELECT username, name, email, address, gender, lastLoginDate, phoneNumber
+		FROM patients;";
+		$result = mysqli_query($db, $query);
+			$rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+				$rows[] = $row;
+			}
+		$_SESSION['queriedPatients'] = $rows;
+		$_SESSION['queriedPatientsBack'] = true;
+		unset($_SESSION['queriedDoctorsBack']);
+		unset($_SESSION['queriedReservationsBack']);
+	}
+	
+	//Query doctors
+	if(isset($_POST['queryDoctors'])){
+		$query = "SELECT name, address, gender, phoneNumber, specialization, docType, DID
+		FROM doctors;";
+		$result = mysqli_query($db, $query);
+			$rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+				$rows[] = $row;
+			}
+		$_SESSION['queriedDoctors'] = $rows;
+		$_SESSION['queriedDoctorsBack'] = true;
+		unset($_SESSION['queriedPatientsBack']);
+		unset($_SESSION['queriedReservationsBack']);
+	}
+	
+	//Query Reservations
+	if(isset($_POST['queryReservations'])){
+		$query = "SELECT patients.name AS 'patientName', doctors.name AS 'doctorName',
+				doctors.specialization AS 'specialization', doctors.docType AS 'docType',
+				reservations.confirmed AS 'confirmation'
+				FROM ((reservations 
+				INNER JOIN patients ON reservations.patientUsername = patients.username)
+				INNER JOIN doctors ON reservations.doctorDID = doctors.DID);";
+		$result = mysqli_query($db, $query);
+			$rows = [];
+			while($row = mysqli_fetch_array($result))
+			{
+				$rows[] = $row;
+			}
+		$_SESSION['queriedReservations'] = $rows;
+		$_SESSION['queriedReservationsBack'] = true;
+		unset($_SESSION['queriedDoctorsBack']);
+		unset($_SESSION['queriedPatientsBack']);
+	}
+	
+	
+	
 ?>
 
 

@@ -21,14 +21,16 @@
 
 
 #myTable {
+  width: 100%	;
+  margin-right: 0px;
+  margin-left: auto;
   border-collapse: collapse;
-  width: 100%;
   border: 1px solid #ddd;
   font-size: 18px;
 }
 
 #myTable th, #myTable td {
-  text-align: left;
+  text-align: right;
   padding: 12px;
 }
 
@@ -42,12 +44,12 @@
 </style>
 </head>
 <body>
-<title>Confirm Reservations</title>
+<title>تأكيد الحجوزات</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 
 
 <div class="header">
-  	<h2>Confirm reservations</h2>
+  	<h2>تأكيد الحجوزات</h2>
   </div>
 
 <form id="form" method="post" action="resConfirmation.php" >
@@ -72,14 +74,14 @@
 		
 <?php if (isset($_SESSION['resBack'])) : ?>
 
-	<table id="myTable">
+	<table id="myTable" DIR="RTL">
 	
 	  <tr >
-		<th style="width:20%;">Patient's name</th>
-		<th style="width:20%;">Doctor's name</th>
-		<th style="width:20%;">Doctor's specialization</th>
-		<th style="width:20%;">Doctor's type</th>
-		<th style="width:20%;">Confirm</th>
+		<th style="width:20%;">أسم المريض</th>
+		<th style="width:20%;">أسم الطبيب</th>
+		<th style="width:20%;">تخصص الطبيب</th>
+		<th style="width:20%;">درجة اطبيب</th>
+		<th style="width:20%;">تأكيد</th>
 	  </tr>
 	  
 	  
@@ -92,7 +94,7 @@
 				echo '<td>'.$item['doctorName'].'</td>';
 				echo '<td>'.$item['specialization'].'</td>';
 				echo '<td>'.$item['docType'].'</td>';
-				echo '<td><button  type="submit" class="btn"  name="confirmReservation" value="',$item["patientUsername"]." ".$item["DID"],'">Confirm</button> </td>';
+				echo '<td><button  type="submit" class="btn"  name="confirmReservation" value="',$item["patientUsername"]." ".$item["DID"],'">تأكيد</button> </td>';
 				echo '</tr>';
 		
 			}
@@ -113,9 +115,11 @@
 		
   	
 	<?php if(!isset($_SESSION['resBack'])) :?>
-	<button  id="searchit" type="submit" class="btn" name="search_reservations">Search</button>
+	<button  id="searchit" type="submit" class="btn" name="search_reservations">بحث</button>
+	<br>
 	<?php endif; ?>
-	<button   type="button" class="btn" name="home" onclick="location.href = 'index.php';">Home</button>
+	<br>
+	<button   type="button" class="btn" name="home" onclick="location.href = 'index.php';">الصفحة الريئسية</button>
 </form>
 <script>
 
