@@ -90,3 +90,28 @@
 2- Change the whole thing into arabic "I have already digged into how to support such encoding".
 
 3- Very detailed ER diagram to recheck the database design.
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Version 4**
+
+**Updates**
+
+1- The Nurse can query the available doctors, patients and reservations on the database both dynamically and interchangeably with filter options.
+
+2- The system in both Arabic and English Languages.
+
+3- Very detialed ER diagram to recheck the database design.
+
+**Hospital Reservation System Entity Relationship Diagram**
+
+![HRSERD.PNG]
+
+**To be done next**
+
+1- Studying the queueing system to be integrated with the Hospital reservation system.
+
+2- Recheck the design of the HRS and add any missing components.
