@@ -108,7 +108,7 @@
 
 **Hospital Reservation System Entity Relationship Diagram**
 
-![HRSERD.PNG]
+![](HRSERD.PNG)
 
 **To be done next**
 
